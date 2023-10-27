@@ -23,54 +23,34 @@ class ProductsService{
   }
 
   async create(data){
-    const newProduct={
-      id: faker.string.uuid(),
-      ...data //el spread operator es para concatenar la data
-    }
-    this.products.push(newProduct);
+    const newProduct= await models.Products.create(data); // el products sale de models: modelsName
+
     return newProduct
   }
 
   async find () {
-    const query= 'SELECT * FROM categories';
-    const {data, metadata}=await sequelize.query (query);
-    return {
-      data,
-      metadata
-    };
+    const rta= await models.Products.findAll()
+    return rta;
   }
 
   async findOne(id) {
-    const product= this.products.find(item=>item.id===id);
-    if(!product){
-      throw boom.notFound('product not found')
+    const products= await models.Products.findByPk(id);
+    if (!products) {
+      throw boom.notFound('products not found')
     }
-    if(product.isBlock){
-      throw boom.conflict('product is block')
-    }
-    return product;
+    return products;
   }
 
   async update(id, changes){
-    const index=this.products.findIndex(item=>item.id===id);
-    if(index===-1) {
-      throw boom.notFound('product not found')
-    }
-    const product = this.products[index];
-    this.products[index]={
-      ...product,
-      ...changes
-    }
-    return this.products[index];
+    const products= await this.findOne(id);
+   const rta= await products.update(changes)
+    return rta;
   }
 
   async delete(id){
-    const index=this.products.findIndex(item=>item.id===id);
-    if (index===-1) {
-      throw boom.notFound('product not found');
-    }
-    this.products.splice(index, 1);
-    return{id};
+    const products= await this.findOne(id);
+   await products.destroy();
+    return {id};
   }
 }
 
