@@ -40,6 +40,7 @@ router.delete('/:id', async (req, res)=>{
 })
 
 
+
  router.get('/:id', async (req, res)=>{
   const {id} = req.params;
   const rta=await service.findOne({
@@ -51,3 +52,13 @@ router.delete('/:id', async (req, res)=>{
  })
 
  module.exports= router;
+
+ router.get('/:id', async (req, res)=>{
+  const {id} = req.params;
+  const rta=await service.findOne({
+    where:{
+      id:id
+    }
+  });
+  res.json(rta)
+ })
