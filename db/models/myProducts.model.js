@@ -25,8 +25,18 @@ const ProductsSchema={
     description:{
     allowNull:true,
     type: DataTypes.STRING,
-
     },
+
+    category:{
+    allowNull:true,
+    type: DataTypes.STRING,
+    },
+
+    image:{
+    allowNull:true,
+    type: DataTypes.STRING,
+    },
+
     createAt:{
     allowNull:false,
     type: DataTypes.DATE,
