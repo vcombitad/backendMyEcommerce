@@ -12,12 +12,13 @@ const setupModels = require('../db/models');
 // //   logging:true,
 // // });
 const sequelize = new Sequelize(
-  'myEcommerce', //Nombre de la base
+  'railway', //Nombre de la base
   'postgres', //Usuario
-  '1234', // Password
+  'B5Cd4AD3fD*BgD*ef3C3eA-aE4635a13', // Password
   {
-      host: 'localhost',
-      dialect: 'postgres'
+      host: 'roundhouse.proxy.rlwy.net',
+      dialect: 'postgres',
+      port: 20209
   }
 );
 
